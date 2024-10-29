@@ -1,0 +1,96 @@
+[gd_resource type="SpriteFrames" load_steps=12 format=3 uid="uid://ka6svqqkeqhe"]
+
+[ext_resource type="Texture2D" uid="uid://desi6ffagaqia" path="res://assets/textures/ennemies/were-bear.png" id="1_7qg7q"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7j2rp"]
+atlas = ExtResource("1_7qg7q")
+region = Rect2(64, 128, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sgj2b"]
+atlas = ExtResource("1_7qg7q")
+region = Rect2(128, 128, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p6h8r"]
+atlas = ExtResource("1_7qg7q")
+region = Rect2(192, 128, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ik6hy"]
+atlas = ExtResource("1_7qg7q")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_27kd4"]
+atlas = ExtResource("1_7qg7q")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6104g"]
+atlas = ExtResource("1_7qg7q")
+region = Rect2(0, 128, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e52gx"]
+atlas = ExtResource("1_7qg7q")
+region = Rect2(0, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jdk3b"]
+atlas = ExtResource("1_7qg7q")
+region = Rect2(64, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_phvdr"]
+atlas = ExtResource("1_7qg7q")
+region = Rect2(128, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x7x1x"]
+atlas = ExtResource("1_7qg7q")
+region = Rect2(192, 64, 64, 64)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7j2rp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sgj2b")
+}, {
+"duration": 8.0,
+"texture": SubResource("AtlasTexture_p6h8r")
+}],
+"loop": false,
+"name": &"attack",
+"speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ik6hy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_27kd4")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 0.5
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6104g")
+}],
+"loop": false,
+"name": &"pre_attack",
+"speed": 0.5
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e52gx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jdk3b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_phvdr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x7x1x")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 2.0
+}]

@@ -1,0 +1,39 @@
+[gd_scene load_steps=6 format=3 uid="uid://bvqlvg1ml7j8a"]
+
+[ext_resource type="Script" path="res://assets/scripts/weapon_controller.gd" id="1_eu305"]
+[ext_resource type="Script" path="res://assets/scripts/blunt/blunt.gd" id="2_cddu4"]
+[ext_resource type="ArrayMesh" uid="uid://ckjtwgjbm7ibh" path="res://assets/meshes/weapons/blade.res" id="3_tuurl"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_gu8ic"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ddxm5"]
+seamless = true
+noise = SubResource("FastNoiseLite_gu8ic")
+
+[node name="Weapon" type="Node3D" node_paths=PackedStringArray("mesh", "shadow")]
+script = ExtResource("1_eu305")
+mesh = NodePath("Shoulder/Elbow/Hand/Mesh")
+shadow = NodePath("Shadow")
+sway_noise = SubResource("NoiseTexture2D_ddxm5")
+
+[node name="Shoulder" type="Node3D" parent="."]
+
+[node name="Elbow" type="Node3D" parent="Shoulder"]
+
+[node name="Hand" type="Node3D" parent="Shoulder/Elbow"]
+
+[node name="Mesh" type="MeshInstance3D" parent="Shoulder/Elbow/Hand"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.06, 0)
+cast_shadow = 0
+mesh = ExtResource("3_tuurl")
+skeleton = NodePath("../../../..")
+
+[node name="Shadow" type="MeshInstance3D" parent="."]
+cast_shadow = 3
+mesh = ExtResource("3_tuurl")
+skeleton = NodePath("../Shoulder/Elbow/Hand/Mesh")
+
+[node name="Blunt" type="Node" parent="."]
+script = ExtResource("2_cddu4")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]

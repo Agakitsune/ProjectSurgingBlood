@@ -1,0 +1,86 @@
+[gd_scene load_steps=9 format=3 uid="uid://bvqlvg1ml7j8a"]
+
+[ext_resource type="Script" path="res://assets/scripts/weapon_controller.gd" id="1_eu305"]
+[ext_resource type="Script" path="res://assets/scripts/blunt/blunt.gd" id="2_cddu4"]
+[ext_resource type="ArrayMesh" uid="uid://ckjtwgjbm7ibh" path="res://assets/meshes/weapons/blade.res" id="3_tuurl"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_6r3fr"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_bp2h7"]
+noise = SubResource("FastNoiseLite_6r3fr")
+
+[sub_resource type="Animation" id="Animation_xxyq1"]
+length = 0.001
+
+[sub_resource type="Animation" id="Animation_nugc2"]
+resource_name = "a"
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Shoulder:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Shoulder:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Shoulder:position:z")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bjner"]
+_data = {
+"RESET": SubResource("Animation_xxyq1"),
+"a": SubResource("Animation_nugc2")
+}
+
+[node name="Weapon" type="Node3D" node_paths=PackedStringArray("mesh", "shadow")]
+script = ExtResource("1_eu305")
+mesh = NodePath("Shoulder/Elbow/Wrist/Mesh")
+shadow = NodePath("Shadow")
+noise = SubResource("NoiseTexture2D_bp2h7")
+
+[node name="Shoulder" type="Node3D" parent="."]
+
+[node name="Elbow" type="Node3D" parent="Shoulder"]
+
+[node name="Wrist" type="Node3D" parent="Shoulder/Elbow"]
+
+[node name="Mesh" type="MeshInstance3D" parent="Shoulder/Elbow/Wrist"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.06, 0)
+cast_shadow = 0
+mesh = ExtResource("3_tuurl")
+skeleton = NodePath("../../../..")
+
+[node name="Shadow" type="MeshInstance3D" parent="."]
+cast_shadow = 3
+mesh = ExtResource("3_tuurl")
+skeleton = NodePath("../Shoulder/Elbow/Wrist/Mesh")
+
+[node name="Blunt" type="Node" parent="."]
+script = ExtResource("2_cddu4")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_bjner")
+}

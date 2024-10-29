@@ -1,0 +1,66 @@
+[gd_scene load_steps=12 format=3 uid="uid://b8gherif4p6wi"]
+
+[ext_resource type="Script" path="res://assets/scripts/weapon_controller.gd" id="1_7cq1j"]
+[ext_resource type="Script" path="res://assets/scripts/weapon_visualizer.gd" id="1_bwf1k"]
+[ext_resource type="Animation" uid="uid://ck4df2dpiv3mv" path="res://assets/animations/weapons/blade/blade_attack_1.res" id="2_i26q0"]
+[ext_resource type="Resource" uid="uid://diouaw3bebwnk" path="res://assets/scripts/resources/poses/blade/idle.tres" id="2_uqk7i"]
+[ext_resource type="ArrayMesh" uid="uid://ckjtwgjbm7ibh" path="res://assets/meshes/weapons/blade.res" id="3_g8w4u"]
+
+[sub_resource type="Animation" id="Animation_krn7o"]
+length = 0.5
+
+[sub_resource type="Animation" id="Animation_miuw5"]
+resource_name = "blade_attack_1"
+length = 2.0
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mf6qt"]
+_data = {
+"RESET": SubResource("Animation_krn7o"),
+"blade_attack": ExtResource("2_i26q0"),
+"blade_attack_1": SubResource("Animation_miuw5")
+}
+
+[sub_resource type="Animation" id="Animation_fh8r0"]
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_c2sry"]
+_data = {
+"a": SubResource("Animation_fh8r0")
+}
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_bigcn"]
+size = Vector3(0.1, 0.8, 0.1)
+
+[node name="WeaponVisualizer" type="Node3D"]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+script = ExtResource("1_7cq1j")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Camera3D"]
+libraries = {
+"": SubResource("AnimationLibrary_mf6qt"),
+"test": SubResource("AnimationLibrary_c2sry")
+}
+
+[node name="Anchor" type="Node3D" parent="Camera3D"]
+script = ExtResource("1_bwf1k")
+pose = ExtResource("2_uqk7i")
+pose_name = &"Attack1"
+
+[node name="Shoulder" type="Node3D" parent="Camera3D/Anchor"]
+transform = Transform3D(1, 0, 0, 0, 0.984808, 0.173648, 0, -0.173648, 0.984808, 0, -0.08, 0)
+
+[node name="Elbow" type="Node3D" parent="Camera3D/Anchor/Shoulder"]
+
+[node name="Wrist" type="Node3D" parent="Camera3D/Anchor/Shoulder/Elbow"]
+transform = Transform3D(1.31043e-11, -3.61999e-06, -1, -1, -3.61999e-06, 2.68882e-17, -3.61999e-06, 1, -3.61999e-06, 0.18, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Camera3D/Anchor/Shoulder/Elbow/Wrist"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0621558, 0)
+mesh = ExtResource("3_g8w4u")
+skeleton = NodePath("../../../../..")
+
+[node name="StaticBody3D" type="Area3D" parent="Camera3D/Anchor/Shoulder/Elbow/Wrist"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Camera3D/Anchor/Shoulder/Elbow/Wrist/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 2.27374e-13, 0, 2.27374e-13, 1, 0, 0.46, 0)
+shape = SubResource("BoxShape3D_bigcn")

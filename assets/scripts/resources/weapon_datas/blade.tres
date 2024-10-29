@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="WeaponData" load_steps=10 format=3 uid="uid://uwsrtry38j6o"]
+
+[ext_resource type="ArrayMesh" uid="uid://ckjtwgjbm7ibh" path="res://assets/meshes/weapons/blade.res" id="1_5pg6b"]
+[ext_resource type="Script" path="res://assets/scripts/resources/attack.gd" id="1_b348q"]
+[ext_resource type="Script" path="res://assets/scripts/resources/weapon_data.gd" id="1_qpxsh"]
+[ext_resource type="Resource" uid="uid://cqxgqxufr5co7" path="res://assets/scripts/resources/poses/blade/crouch.tres" id="1_ysonp"]
+[ext_resource type="Resource" uid="uid://diouaw3bebwnk" path="res://assets/scripts/resources/poses/blade/idle.tres" id="2_enygn"]
+[ext_resource type="Script" path="res://assets/scripts/resources/weapon_deforms/blade.gd" id="2_ibitm"]
+[ext_resource type="Resource" uid="uid://6myvopc8ppqt" path="res://assets/scripts/resources/attacks/blade/attack1.tres" id="2_uchun"]
+[ext_resource type="Resource" uid="uid://b47bb41ru6hg0" path="res://assets/scripts/resources/poses/blade/walk.tres" id="4_hhqok"]
+[ext_resource type="Script" path="res://assets/scripts/resources/weapon_mods/blade.gd" id="7_1p12j"]
+
+[resource]
+script = ExtResource("1_qpxsh")
+name = &"Blade"
+type = 0
+idle = ExtResource("2_enygn")
+walk = ExtResource("4_hhqok")
+crouch = ExtResource("1_ysonp")
+attacks = Array[ExtResource("1_b348q")]([ExtResource("2_uchun")])
+deform_script = ExtResource("2_ibitm")
+modifier_script = ExtResource("7_1p12j")
+mesh = ExtResource("1_5pg6b")
+shadow = true

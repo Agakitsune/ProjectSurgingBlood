@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="EnemyData" load_steps=6 format=3 uid="uid://bu1b6yk5kvet2"]
+
+[ext_resource type="Script" path="res://assets/scripts/resources/enemy_data.gd" id="1_71uxy"]
+[ext_resource type="SpriteFrames" uid="uid://ka6svqqkeqhe" path="res://assets/sprite_frames/ennemies/werebear.tres" id="2_p3kr6"]
+[ext_resource type="Script" path="res://assets/scripts/states/enemy_states/werebear/idle_state.gd" id="3_chkhu"]
+[ext_resource type="Script" path="res://assets/scripts/states/enemy_states/werebear/walk_state.gd" id="4_p01mc"]
+[ext_resource type="Script" path="res://assets/scripts/states/enemy_states/werebear/attack_state.gd" id="5_ndl4t"]
+
+[resource]
+script = ExtResource("1_71uxy")
+name = &"Werebear"
+health = 10.0
+offset = 32
+height = 52.0
+scale = 6.0
+dimension = Vector3(2, 2.9, 2)
+sprite_frames = ExtResource("2_p3kr6")
+states = Array[Script]([ExtResource("3_chkhu"), ExtResource("4_p01mc"), ExtResource("5_ndl4t")])
+default = &"IdleWerebearState"

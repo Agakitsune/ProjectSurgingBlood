@@ -1,0 +1,93 @@
+[gd_scene load_steps=3 format=3 uid="uid://evegdgmmlyaa"]
+
+[ext_resource type="Script" path="res://assets/scripts/interfaces/debug_interface.gd" id="1_2e82a"]
+[ext_resource type="Script" path="res://assets/scripts/interfaces/mod_control.gd" id="2_5ach2"]
+
+[node name="DebugInterface" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+script = ExtResource("1_2e82a")
+
+[node name="_MainMargin" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="_Main" type="HBoxContainer" parent="_MainMargin"]
+layout_mode = 2
+
+[node name="_Left" type="VBoxContainer" parent="_MainMargin/_Main"]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+
+[node name="TopLeft" type="VBoxContainer" parent="_MainMargin/_Main/_Left"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+script = ExtResource("2_5ach2")
+
+[node name="LeftWide" type="GridContainer" parent="_MainMargin/_Main/_Left"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+script = ExtResource("2_5ach2")
+
+[node name="BottomLeft" type="GridContainer" parent="_MainMargin/_Main/_Left"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+script = ExtResource("2_5ach2")
+
+[node name="_Center" type="VBoxContainer" parent="_MainMargin/_Main"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="TopWide" type="GridContainer" parent="_MainMargin/_Main/_Center"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+script = ExtResource("2_5ach2")
+
+[node name="Center" type="GridContainer" parent="_MainMargin/_Main/_Center"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+size_flags_vertical = 3
+script = ExtResource("2_5ach2")
+
+[node name="BottomWide" type="GridContainer" parent="_MainMargin/_Main/_Center"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+script = ExtResource("2_5ach2")
+
+[node name="_Right" type="VBoxContainer" parent="_MainMargin/_Main"]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+
+[node name="TopRight" type="GridContainer" parent="_MainMargin/_Main/_Right"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+
+[node name="RightWide" type="GridContainer" parent="_MainMargin/_Main/_Right"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="BottomRight" type="GridContainer" parent="_MainMargin/_Main/_Right"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2

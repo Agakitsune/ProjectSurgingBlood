@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://lcxhbo00ftsy"]
+
+[ext_resource type="Script" path="res://assets/scripts/ennemy.gd" id="1_doyi6"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_xdsgv"]
+size = Vector3(0.5, 1.5, 0.5)
+
+[sub_resource type="BoxMesh" id="BoxMesh_lds7k"]
+size = Vector3(0.25, 0.4, 0.25)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_066et"]
+size = Vector3(0.5, 1.7, 0.5)
+
+[node name="Ennemy" type="CharacterBody3D"]
+script = ExtResource("1_doyi6")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
+mesh = SubResource("BoxMesh_xdsgv")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.48111, 0.248405)
+mesh = SubResource("BoxMesh_lds7k")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.85, 0)
+shape = SubResource("BoxShape3D_066et")

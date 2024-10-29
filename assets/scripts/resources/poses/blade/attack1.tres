@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Pose" load_steps=2 format=3 uid="uid://cvjgdhghlgtan"]
+
+[ext_resource type="Script" path="res://assets/scripts/resources/pose.gd" id="1_6sfjv"]
+
+[resource]
+script = ExtResource("1_6sfjv")
+name = &"Attack1"
+shoulder_position = Vector3(0, -0.08, 0)
+shoulder_rotation = Vector3(-10, 0, 0)
+elbow_position = Vector3(0, 0, 0)
+elbow_rotation = Vector3(0, 0, 0)
+wrist_position = Vector3(0.18, 0, 0)
+wrist_rotation = Vector3(0, -90.0002, -90.0002)

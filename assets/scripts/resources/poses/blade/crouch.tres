@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Pose" load_steps=2 format=3 uid="uid://cqxgqxufr5co7"]
+
+[ext_resource type="Script" path="res://assets/scripts/resources/pose.gd" id="1_f0o8y"]
+
+[resource]
+script = ExtResource("1_f0o8y")
+name = &"Crouch"
+shoulder_position = Vector3(0, 0, 0)
+shoulder_rotation = Vector3(0, 0, 0)
+elbow_position = Vector3(0.35, 0, 0)
+elbow_rotation = Vector3(-38, 0, 0)
+wrist_position = Vector3(0, 7.45058e-09, -0.224)
+wrist_rotation = Vector3(28.8791, -17.1921, 81.5012)

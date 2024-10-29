@@ -1,0 +1,40 @@
+[gd_scene load_steps=6 format=3 uid="uid://lcxhbo00ftsy"]
+
+[ext_resource type="Script" path="res://assets/scripts/ennemy.gd" id="1_doyi6"]
+[ext_resource type="SpriteFrames" uid="uid://ka6svqqkeqhe" path="res://assets/sprite_frames/ennemies/werebear.tres" id="2_1yt1o"]
+[ext_resource type="Script" path="res://assets/scripts/enemy_state_machine.gd" id="3_bq0tw"]
+[ext_resource type="Texture2D" uid="uid://dqxt8g8qbulu2" path="res://assets/textures/spotted.png" id="4_ai5ct"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_066et"]
+size = Vector3(2, 2.9, 2)
+
+[node name="Ennemy" type="CharacterBody3D" node_paths=PackedStringArray("collider", "frames", "machine") groups=["enemy"]]
+collision_mask = 3
+script = ExtResource("1_doyi6")
+collider = NodePath("CollisionShape3D")
+frames = NodePath("AnimatedSprite3D")
+machine = NodePath("EnemyStateMachine")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.45, 0)
+shape = SubResource("BoxShape3D_066et")
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="."]
+transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 6, 0, 0, 0)
+offset = Vector2(0, 32)
+billboard = 2
+texture_filter = 2
+sprite_frames = ExtResource("2_1yt1o")
+animation = &"walk"
+
+[node name="EnemyStateMachine" type="Node" parent="." node_paths=PackedStringArray("enemy", "frames")]
+script = ExtResource("3_bq0tw")
+enemy = NodePath("..")
+frames = NodePath("../AnimatedSprite3D")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 3, 0)
+offset = Vector2(0, 8)
+billboard = 2
+texture_filter = 2
+texture = ExtResource("4_ai5ct")
