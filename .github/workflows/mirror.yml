@@ -1,18 +1,18 @@
 name: Mirror
 
 env:
-    MIRROR_REPO: "git@github.com:EpitechPromo2026/G-EIP-700-RUN-7-1-eip-denis.maillot.git"
+  MIRROR_REPO: "git@github.com:EpitechPromo2026/G-EIP-700-RUN-7-1-eip-denis.maillot.git"
 
 on:
-    # You can only pull request to main since it only contain final version of the code when all tests passed and build is successful
-    push:
-        branches:
-        - dev
+  # You can only pull request to main since it only contain final version of the code when all tests passed and build is successful
+  push:
+    branches:
+    - dev
 
-    pull_request:
-        branches:
-        - main
-        - dev
+  pull_request:
+    branches:
+    - main
+    - dev
 
 jobs:
   test:
