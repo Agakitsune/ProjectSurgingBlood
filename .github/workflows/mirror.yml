@@ -15,30 +15,30 @@ on:
         - dev
 
 jobs:
-    test:
-        name: Tests
-        steps:
-            # - uses: ./.github/actions/test
+  test:
+    name: Tests
+    steps:
+      - uses: ./.github/actions/test
 
-    build:
-        name: Build
-        steps:
-            # - uses: ./.github/actions/build/windows
-            # - uses: ./.github/actions/build/linux
+  build:
+    name: Build
+    steps:
+      - uses: ./.github/actions/build/windows
+      - uses: ./.github/actions/build/linux
 
-    mirror:
-        needs:
-            - test
-            - build
-        name: Mirror
-        runs-on: ubuntu-latest
-        steps:
-            - uses: actions/checkout@v3
-            with:
-                fetch-depth: 0
-            - uses: pixta-dev/repository-mirroring-action@v1.1.1
-            with:
-                target_repo_url:
-                    ${{ env.MIRROR_REPO }}
-                ssh_private_key:
-                    ${{ secrets.GIT_SSH_PRIVATE_KEY }}
+  mirror:
+    needs:
+      - test
+      - build
+    name: Mirror
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - uses: pixta-dev/repository-mirroring-action@v1.1.1
+        with:
+          target_repo_url:
+            ${{ env.MIRROR_REPO }}
+          ssh_private_key:
+            ${{ secrets.GIT_SSH_PRIVATE_KEY }}

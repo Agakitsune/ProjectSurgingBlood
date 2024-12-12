@@ -1,6 +1,5 @@
 name: Test
 
 runs:
-    using: 'composite'
-    steps:
-        
+  using: 'composite'
+  steps:
