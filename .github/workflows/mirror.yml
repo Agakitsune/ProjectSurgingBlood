@@ -15,29 +15,29 @@ on:
     - dev
 
 jobs:
-  test:
-    name: Tests
-    runs-on: ubuntu-latest
-    steps:
+  # test:
+  #   name: Tests
+  #   runs-on: ubuntu-latest
+  #   steps:
       # - uses: ./.github/actions/test
 
-  build-windows:
-    name: Build for Windows
-    runs-on: windows-latest
-    steps:
+  # build-windows:
+  #   name: Build for Windows
+  #   runs-on: windows-latest
+  #   steps:
       # - uses: ./.github/actions/build/linux
   
-  build-linux:
-    name: Build for Linux
-    runs-on: ubuntu-latest
-    steps:
+  # build-linux:
+  #   name: Build for Linux
+  #   runs-on: ubuntu-latest
+  #   steps:
       # - uses: ./.github/actions/build/windows
 
   mirror:
-    needs:
-      - test
-      - build-windows
-      - build-linux
+    # needs:
+    #   - test
+    #   - build-windows
+    #   - build-linux
     name: Mirror
     runs-on: ubuntu-latest
     steps:
