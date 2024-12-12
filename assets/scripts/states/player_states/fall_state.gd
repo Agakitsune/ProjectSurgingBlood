@@ -1,3 +1,4 @@
+class_name FallState
 extends PlayerState
 
 @export var speed: float = 4.0

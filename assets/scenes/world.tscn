@@ -417,7 +417,7 @@ script = ExtResource("5_nm05o")
 [node name="Enemies" type="Node3D" parent="."]
 
 [node name="Ennemy" parent="Enemies" instance=ExtResource("9_n6o8v")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30.7107, 0, 0)
 data = ExtResource("10_n80xi")
 
 [node name="Camera3D" type="Camera3D" parent="."]

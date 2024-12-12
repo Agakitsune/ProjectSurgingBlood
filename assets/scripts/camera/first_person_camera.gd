@@ -23,6 +23,9 @@ var _mouse_rotation: Vector3
 var _rotation_input: float
 var _tilt_input: float
 
+var _c: int = 0
+var _k: float = 0.0
+
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	
