@@ -745,6 +745,7 @@ This section describes the guidelines for the project structure.
 - [Naming Conventions](#naming-conventions-1)
 - [Folder Structure](#folder-structure)
 - [Folder Content](#folder-content)
+- [Branches and Commits](#branches-and-commits)
 
 ## Naming Conventions
 *see [Naming Conventions](#naming-conventions)*
@@ -828,4 +829,40 @@ root
 │   │   ├── face.png
 │   │   └── feet.png
 ...
+```
+
+## Branches and Commits
+
+Branches should be named after the feature they implement or the bug they fix with the name of the person who mainly works on it and use `camelCase`.
+
+**Good**:
+
+```python
+# Lucas is working on the player movement
+git checkout -b lucas_PlayerMovement
+```
+
+**Bad**:
+
+```python
+# What is this branch about ? Who is working on it ?
+git checkout -b codedelamorkitu
+```
+
+Commits should be small and concise. They should only implement a single feature or fix a single bug and start with a keyword that symbolize what it is about.
+
+**Good**:
+
+```python
+git commit -m "feat: Add player movement"
+git commit -m "fix: Fix player movement"
+git commit -m "merge: Merge branch 'lucas_PlayerMovement'"
+git commit -m "change: Change player speed movement"
+```
+
+**Bad**:
+
+```python
+# Is it a feature or a change ?
+git commit -m "Added cooldown"
 ```
