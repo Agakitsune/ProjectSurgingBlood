@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://cediwcvy721py"]
+
+[ext_resource type="Script" path="res://hook.gd" id="1_uq51c"]
+
+[node name="Hook" type="Node3D"]
+visible = false
+script = ExtResource("1_uq51c")
+
+[node name="HookCast" type="RayCast3D" parent="."]
+target_position = Vector3(0, 0, -60)
