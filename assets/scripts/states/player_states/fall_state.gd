@@ -18,7 +18,7 @@ var _air_time: float = 0.0
 func enter(previous_state: String, state: State):
 	_control = false
 	if previous_state == "SlideState":
-		_weapon.load_pose(_weapon.walk_pose).duration(0.3)
+		#_weapon.load_pose(_weapon.walk_pose).duration(0.3)
 		
 		await _animation.animation_finished
 		
@@ -50,8 +50,8 @@ func update(delta: float):
 	_player.update_velocity()
 	_actual_speed = lerp(_actual_speed, speed, delta)
 	
-	_weapon.mouse(delta)
-	_weapon.update(delta)
+	#_weapon.mouse(delta)
+	#_weapon.update(delta)
 	
 	if _player.velocity.y < 0.0:
 		_air_time += delta

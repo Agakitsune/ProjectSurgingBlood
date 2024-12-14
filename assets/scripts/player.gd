@@ -17,7 +17,7 @@ func _ready() -> void:
 	weapon = _scene.instantiate()
 	weapon.data = preload("res://assets/scripts/resources/weapon_datas/blade.tres")
 
-	camera.camera.add_child(weapon)
+	#camera.camera.add_child(weapon)
 
 	Globals.player = self
 

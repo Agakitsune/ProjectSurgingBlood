@@ -19,9 +19,9 @@ func update(delta: float):
 	_player.update_input(self.speed, acceleration, deceleration)
 	_player.update_velocity()
 	
-	_weapon.bob(delta, speed, 0.02)
-	_weapon.mouse(delta)
-	_weapon.update(delta)
+	#_weapon.bob(delta, speed, 0.02)
+	#_weapon.mouse(delta)
+	#_weapon.update(delta)
 	
 	var on_floor = _player.is_on_floor()
 	var speed = _player.velocity.length()
@@ -53,8 +53,8 @@ func update(delta: float):
 	if _player.velocity.y < 0.0 and not on_floor:
 		delegated.emit("FallState")
 
-	if Input.is_action_just_pressed("main_attack"):
-		_weapon.attack()
+	#if Input.is_action_just_pressed("main_attack"):
+		#_weapon.attack()
 
 
 func physics_update(delta: float):
@@ -66,5 +66,5 @@ func set_animation_speed(speed: float) -> void:
 	_animation.speed_scale = weight * 3.0
 
 
-func on_attack_finished() -> void:
-	_weapon.load_pose(_weapon.walk_pose).duration(0.2)
+#func on_attack_finished() -> void:
+	#_weapon.load_pose(_weapon.walk_pose).duration(0.2)
