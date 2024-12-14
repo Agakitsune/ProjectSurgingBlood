@@ -26,6 +26,9 @@ var _tilt_input: float
 var _c: int = 0
 var _k: float = 0.0
 
+@onready var player_arms: PlayerArms = $Camera3D/PlayerArms
+
+
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	
@@ -65,6 +68,14 @@ func _process(delta: float) -> void:
 	
 	_rotation_input = 0.0
 	_tilt_input = 0.0
+
+
+func set_arms_parameter(anim: String, value: Variant):
+	player_arms.set_parameter(anim, value)
+
+
+func get_arms_parameter(anim: String) -> Variant:
+	return player_arms.get_parameter(anim)
 
 
 func _update_rotation(delta: float) -> void:

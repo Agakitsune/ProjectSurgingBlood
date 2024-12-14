@@ -5,9 +5,13 @@ extends PlayerState
 @export var acceleration: float = 0.1
 @export var deceleration: float = 0.25
 
+var _blend: float
+
 func enter(previous_state: String, state: State):
-	_animation.play("PreSprint", -1, 1.0)
-	_animation.queue("Sprint")
+	#_animation.play("PreSprint", -1, 1.0)
+	#_animation.queue("Sprint")
+	
+	_blend = _player.camera.get_arms_parameter("RunBlend/blend_amount")
 
 
 func exit(next_state: String):
@@ -19,6 +23,10 @@ func update(delta: float):
 	_player.update_input(self.speed, acceleration, deceleration)
 	_player.update_velocity()
 	
+	if _blend < 1.0:
+		_blend += delta * 5
+		_player.camera.set_arms_parameter("RunBlend/blend_amount", min(_blend, 1.0))
+	
 	#_weapon.bob(delta, speed, 0.02)
 	#_weapon.mouse(delta)
 	#_weapon.update(delta)
@@ -29,14 +37,14 @@ func update(delta: float):
 	set_animation_speed(speed)
 	
 	if speed == 0.0:
-		_animation.get_animation("ToIdle").track_set_key_value(0, 0, _player.camera.position)
-		_animation.get_animation("ToIdle").track_set_key_value(1, 0, _player.camera.rotation)
-		_animation.play("ToIdle")
+		#_animation.get_animation("ToIdle").track_set_key_value(0, 0, _player.camera.position)
+		#_animation.get_animation("ToIdle").track_set_key_value(1, 0, _player.camera.rotation)
+		#_animation.play("ToIdle")
 		
 		delegated.emit("IdleState")
 
-	if Input.is_action_just_released("sprint"):
-		delegated.emit("WalkState")
+	#if Input.is_action_just_released("sprint"):
+		#delegated.emit("WalkState")
 
 	if speed > 6.0:
 		match Globals.option.crouch:
