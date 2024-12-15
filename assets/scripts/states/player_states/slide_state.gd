@@ -13,11 +13,11 @@ func enter(previous_state: String, state: State):
 	_animation.speed_scale = 1.0
 	_animation.play("Slide", -1.0, 4.0)
 	
-	(_weapon.load_pose(_weapon.crouch_pose)
-			.duration(0.25)
-			.easing(Blunt.BluntEasing.BACK)
-			.easing_type(Blunt.BluntEasingType.OUT)
-	)
+	#(_weapon.load_pose(_weapon.crouch_pose)
+			#.duration(0.25)
+			#.easing(Blunt.BluntEasing.BACK)
+			#.easing_type(Blunt.BluntEasingType.OUT)
+	#)
 
 
 
@@ -30,8 +30,8 @@ func update(delta: float):
 	_player.update_speed(speed, acceleration, deceleration)
 	_player.update_velocity()
 	
-	_weapon.mouse(delta)
-	_weapon.update(delta)
+	#_weapon.mouse(delta)
+	#_weapon.update(delta)
 	
 	if _player.is_on_wall():
 		finish()

@@ -609,7 +609,6 @@ deceleration = 0.5
 
 [node name="SprintState" type="Node" parent="PlayerStateMachine"]
 script = ExtResource("6_aarpj")
-speed = 9.0
 deceleration = 1.0
 
 [node name="CrouchState" type="Node" parent="PlayerStateMachine"]

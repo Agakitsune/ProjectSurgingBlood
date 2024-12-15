@@ -22,16 +22,20 @@ func enter(previous_state: String, state: State):
 		_jump_count = 1
 		_player.velocity.y += jump_velocity
 	
-	if (
-			(previous_state != "WalkState")
-			or (previous_state != "SprintState")
-			or (previous_state != "JumpState")
-	):
-		_weapon.load_pose(_weapon.walk_pose).duration(0.2)
+	_player.camera.set_arms_condition("jump", true)
+	_player.camera.set_arms_condition("fall", false)
+	_player.camera.set_arms_condition("high_fall", false)
+	
+	#if (
+			#(previous_state != "WalkState")
+			#or (previous_state != "SprintState")
+			#or (previous_state != "JumpState")
+	#):
+		#_weapon.load_pose(_weapon.walk_pose).duration(0.2)
 
 
 func exit(next_state: String):
-	pass
+	_player.camera.set_arms_condition("jump", false)
 
 
 func update(delta: float):
@@ -39,8 +43,8 @@ func update(delta: float):
 	_player.update_input(_actual_speed * air_multiplier, acceleration, deceleration)
 	_player.update_velocity()
 	
-	_weapon.mouse(delta)
-	_weapon.update(delta)
+	#_weapon.mouse(delta)
+	#_weapon.update(delta)
 	
 	if Input.is_action_just_pressed("jump") and (_jump_count < jumps):
 		_jump_count += 1

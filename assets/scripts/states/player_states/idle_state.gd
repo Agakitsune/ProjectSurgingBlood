@@ -6,17 +6,14 @@ extends PlayerState
 @export var deceleration: float = 0.25
 
 func enter(previous_state: String, state: State):
-	if previous_state == "CrouchState":
-		_weapon.load_pose(_weapon.idle_pose).duration(0.3)
-	else:
-		_weapon.load_pose(_weapon.idle_pose).duration(0.2)
+	#await _animation.animation_finished
+	#_animation.pause()
 	
-	await _animation.animation_finished
-	_animation.pause()
+	_player.camera.set_arms_condition("idle", true)
 
 
 func exit(next_state: String):
-	pass
+	_player.camera.set_arms_condition("idle", false)
 
 
 func update(delta: float):
@@ -24,9 +21,9 @@ func update(delta: float):
 	_player.update_input(speed, acceleration, deceleration)
 	_player.update_velocity()
 	
-	_weapon.idle(delta)
-	_weapon.mouse(delta)
-	_weapon.update(delta)
+	#_weapon.idle(delta)
+	#_weapon.mouse(delta)
+	#_weapon.update(delta)
 	
 	#_weapon.sway_idle(delta)
 	#_weapon.sway_weapon(delta)
@@ -42,13 +39,13 @@ func update(delta: float):
 				delegated.emit("CrouchState")
 	
 	if _player.velocity.length_squared() > 0.0 and on_floor:
-		delegated.emit("WalkState")
+		delegated.emit("SprintState")
 		
 	if Input.is_action_just_pressed("jump") and on_floor:
 		delegated.emit("JumpState")
 
-	if Input.is_action_just_pressed("main_attack"):
-		_weapon.attack()
+	#if Input.is_action_just_pressed("main_attack"):
+		#_weapon.attack()
 
 	if _player.velocity.y < 0.0 and not on_floor:
 		delegated.emit("FallState")
@@ -58,5 +55,5 @@ func physics_update(delta: float):
 	pass
 
 
-func on_attack_finished() -> void:
-	_weapon.load_pose(_weapon.idle_pose).duration(0.2)
+#func on_attack_finished() -> void:
+	#_weapon.load_pose(_weapon.idle_pose).duration(0.2)

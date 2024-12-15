@@ -10,10 +10,10 @@ func enter(previous_state: String, state: State):
 		await _animation.animation_finished
 	_animation.play("Walk", -1, 1.0)
 
-	if previous_state == "CrouchState":
-		_weapon.load_pose(_weapon.walk_pose).duration(0.3)
-	elif previous_state != "SprintState":
-		_weapon.load_pose(_weapon.walk_pose).duration(0.2)
+	#if previous_state == "CrouchState":
+		#_weapon.load_pose(_weapon.walk_pose).duration(0.3)
+	#elif previous_state != "SprintState":
+		#_weapon.load_pose(_weapon.walk_pose).duration(0.2)
 
 
 func exit(next_state: String):
@@ -26,9 +26,9 @@ func update(delta: float):
 	_player.update_velocity()
 	
 	#_weapon.idle(delta)
-	_weapon.bob(delta, speed, 0.015)
-	_weapon.mouse(delta)
-	_weapon.update(delta)
+	#_weapon.bob(delta, speed, 0.015)
+	#_weapon.mouse(delta)
+	#_weapon.update(delta)
 	
 	var speed = _player.velocity.length()
 	var on_floor = _player.is_on_floor()
@@ -52,8 +52,8 @@ func update(delta: float):
 	if _player.velocity.y < 0.0 and not on_floor:
 		delegated.emit("FallState")
 
-	if Input.is_action_just_pressed("main_attack"):
-		_weapon.attack()
+	#if Input.is_action_just_pressed("main_attack"):
+		#_weapon.attack()
 
 	if speed == 0.0:
 		_animation.get_animation("ToIdle").track_set_key_value(0, 0, _player.camera.position.x)
@@ -76,5 +76,5 @@ func set_animation_speed(speed: float) -> void:
 	_animation.speed_scale = lerp(0.0, 2.0, weight)
 
 
-func on_attack_finished() -> void:
-	_weapon.load_pose(_weapon.walk_pose).duration(0.2)
+#func on_attack_finished() -> void:
+	#_weapon.load_pose(_weapon.walk_pose).duration(0.2)

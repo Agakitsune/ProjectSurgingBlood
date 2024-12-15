@@ -16,7 +16,7 @@ func _ready() -> void:
 	
 	await owner.ready
 	
-	PLAYER.weapon.attack_finished.connect(on_attack_finished)
+	#PLAYER.weapon.attack_finished.connect(on_attack_finished)
 	
 	_current = _default
 	_current.enter("", null)
