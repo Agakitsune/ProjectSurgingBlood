@@ -25,12 +25,15 @@ node_connections = [&"RunBlend", 0, &"Idle", &"RunBlend", 1, &"Run", &"output", 
 [node name="PlayerArms" instance=ExtResource("1_2ifnq")]
 script = ExtResource("2_xkf2k")
 
+[node name="Arms_Rig" parent="." index="0"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+
 [node name="Skeleton3D" parent="Arms_Rig" index="0"]
 bones/1/rotation = Quaternion(-0.522416, -0.310617, -0.730009, 0.312547)
 bones/1/scale = Vector3(1, 1, 1)
 bones/2/rotation = Quaternion(1.34814e-08, -2.17e-08, -0.625722, 0.780046)
 bones/2/scale = Vector3(1, 1, 1)
-bones/3/rotation = Quaternion(0.12504, -0.132357, -0.0594873, 0.981483)
+bones/3/rotation = Quaternion(0.125118, -0.131072, -0.0593236, 0.981655)
 bones/4/rotation = Quaternion(-0.152995, 0.0163706, -0.105127, 0.982483)
 bones/5/rotation = Quaternion(-0.153868, 1.98459e-08, -5.48108e-08, 0.988091)
 bones/6/rotation = Quaternion(-0.153868, -4.65238e-08, 2.83748e-08, 0.988091)
@@ -50,7 +53,7 @@ bones/19/rotation = Quaternion(-0.522416, 0.310617, 0.730009, 0.312547)
 bones/19/scale = Vector3(1, 1, 1)
 bones/20/rotation = Quaternion(2.52976e-08, 1.63012e-08, 0.625722, 0.780046)
 bones/20/scale = Vector3(1, 1, 1)
-bones/21/rotation = Quaternion(0.12504, 0.132357, 0.0594874, 0.981483)
+bones/21/rotation = Quaternion(0.1251, 0.131364, 0.059361, 0.981616)
 bones/22/rotation = Quaternion(-0.152995, -0.0163706, 0.105127, 0.982483)
 bones/23/rotation = Quaternion(-0.153868, -6.13179e-08, 5.10406e-08, 0.988091)
 bones/24/rotation = Quaternion(-0.153868, 2.20175e-08, -3.40301e-08, 0.988091)

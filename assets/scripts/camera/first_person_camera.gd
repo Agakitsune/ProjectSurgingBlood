@@ -6,8 +6,12 @@ extends Node3D
 
 @export var camera: Camera3D
 
+@export var player_arms: PlayerArms
+
 @export var pitch_lower_limit := deg_to_rad(-90.0)
 @export var pitch_upper_limit := deg_to_rad(90.0)
+@export var arm_pitch_lower_limit := deg_to_rad(-70.0)
+@export var arm_pitch_upper_limit := deg_to_rad(70.0)
 
 @export var sensitivity := 0.5
 
@@ -25,8 +29,6 @@ var _tilt_input: float
 
 var _c: int = 0
 var _k: float = 0.0
-
-@onready var player_arms: PlayerArms = $Camera3D/PlayerArms
 
 
 func _ready() -> void:
@@ -87,9 +89,15 @@ func _update_rotation(delta: float) -> void:
 func _update_camera_with_parent(delta: float) -> void:
 	var parent_rotation := Vector3(0.0, _mouse_rotation.y, 0.0)
 	var camera_rotation := Vector3(_mouse_rotation.x, 0.0, 0.0)
+	var arms_rotation := Vector3(clamp(
+			_mouse_rotation.x,
+			arm_pitch_lower_limit,
+			arm_pitch_upper_limit
+	), 0.0, 0.0)
 	
-	camera.transform.basis = Basis.from_euler(camera_rotation)
-	parent.transform.basis = Basis.from_euler(parent_rotation)
+	camera.basis = Basis.from_euler(camera_rotation)
+	parent.basis = Basis.from_euler(parent_rotation)
+	player_arms.basis = Basis.from_euler(arms_rotation)
 
 
 func _update_camera(delta: float) -> void:

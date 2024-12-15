@@ -3,11 +3,11 @@
 [ext_resource type="Script" path="res://assets/scripts/camera/first_person_camera.gd" id="1_oums7"]
 [ext_resource type="PackedScene" uid="uid://d6yjfrebdp2r" path="res://assets/scenes/player_arms.tscn" id="2_b1k63"]
 
-[node name="FirstPersonCamera" type="Node3D" node_paths=PackedStringArray("camera")]
+[node name="FirstPersonCamera" type="Node3D" node_paths=PackedStringArray("camera", "player_arms")]
 script = ExtResource("1_oums7")
 camera = NodePath("Camera3D")
+player_arms = NodePath("PlayerArms")
+
+[node name="PlayerArms" parent="." instance=ExtResource("2_b1k63")]
 
 [node name="Camera3D" type="Camera3D" parent="."]
-
-[node name="PlayerArms" parent="Camera3D" instance=ExtResource("2_b1k63")]
-transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 0)
