@@ -2,11 +2,7 @@ class_name FirstPersonCamera
 extends Node3D
 ## A classic First Person Camera
 
-@export var parent: Node3D ## Will rotate with the camera
-
 @export var camera: Camera3D
-
-@export var player_arms: PlayerArms
 
 @export var pitch_lower_limit := deg_to_rad(-90.0)
 @export var pitch_upper_limit := deg_to_rad(90.0)
@@ -27,15 +23,16 @@ var _mouse_rotation: Vector3
 var _rotation_input: float
 var _tilt_input: float
 
-var _c: int = 0
-var _k: float = 0.0
+var _parent: Node3D
+
+@onready var animation_tree: AnimationTree = $AnimationTree
+@onready var arms_rig: Node3D = $Arms_Rig
 
 
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	
-	if not parent:
-		parent = get_parent() as Node3D
+	_parent = get_parent() as Node3D
 
 
 func _input(event: InputEvent) -> void:
@@ -63,21 +60,18 @@ func _unhandled_input(event: InputEvent) -> void:
 func _process(delta: float) -> void:
 	last_rotation = _rotation_input
 	_update_rotation(delta)
-	if parent:
-		_update_camera_with_parent(delta)
-	else:
-		_update_camera(delta)
+	_update_camera_with_parent(delta)
 	
 	_rotation_input = 0.0
 	_tilt_input = 0.0
 
 
-func set_arms_parameter(anim: String, value: Variant):
-	player_arms.set_parameter(anim, value)
+func set_arms_condition(condition: String, value: bool):
+	animation_tree.set("parameters/conditions/" + condition, value)
 
 
-func get_arms_parameter(anim: String) -> Variant:
-	return player_arms.get_parameter(anim)
+func get_arms_condition(condition: String) -> bool:
+	return animation_tree.get_condition("parameters/conditions/" + condition)
 
 
 func _update_rotation(delta: float) -> void:
@@ -96,9 +90,5 @@ func _update_camera_with_parent(delta: float) -> void:
 	), 0.0, 0.0)
 	
 	camera.basis = Basis.from_euler(camera_rotation)
-	parent.basis = Basis.from_euler(parent_rotation)
-	player_arms.basis = Basis.from_euler(arms_rotation)
-
-
-func _update_camera(delta: float) -> void:
-	camera.transform.basis = Basis.from_euler(_mouse_rotation)
+	_parent.basis = Basis.from_euler(parent_rotation)
+	arms_rig.basis = Basis.from_euler(arms_rotation)

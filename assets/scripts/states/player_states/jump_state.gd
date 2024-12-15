@@ -22,6 +22,10 @@ func enter(previous_state: String, state: State):
 		_jump_count = 1
 		_player.velocity.y += jump_velocity
 	
+	_player.camera.set_arms_condition("jump", true)
+	_player.camera.set_arms_condition("fall", false)
+	_player.camera.set_arms_condition("high_fall", false)
+	
 	#if (
 			#(previous_state != "WalkState")
 			#or (previous_state != "SprintState")
@@ -31,7 +35,7 @@ func enter(previous_state: String, state: State):
 
 
 func exit(next_state: String):
-	pass
+	_player.camera.set_arms_condition("jump", false)
 
 
 func update(delta: float):

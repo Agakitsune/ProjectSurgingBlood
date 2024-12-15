@@ -26,15 +26,16 @@ func update_gravity(delta: float) -> void:
 	velocity += get_gravity() * delta
 
 
-func update_input(speed: float, acceleration: float, deceleration: float) -> void:
+func update_input(speed: float, acceleration: float, deceleration: float) -> bool:
 	var input_dir := Input.get_vector("left", "right", "forward", "backward")
 	_direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	if _direction:
 		velocity.x = lerp(velocity.x, _direction.x * speed, acceleration)
 		velocity.z = lerp(velocity.z, _direction.z * speed, acceleration)
-	else:
-		velocity.x = move_toward(velocity.x, 0, deceleration)
-		velocity.z = move_toward(velocity.z, 0, deceleration)
+		return true
+	velocity.x = move_toward(velocity.x, 0, deceleration)
+	velocity.z = move_toward(velocity.z, 0, deceleration)
+	return false
 
 
 func update_speed(speed: float, acceleration: float, deceleration: float) -> void:

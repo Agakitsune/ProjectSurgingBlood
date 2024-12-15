@@ -5,27 +5,22 @@ extends PlayerState
 @export var acceleration: float = 0.1
 @export var deceleration: float = 0.25
 
-var _blend: float
-
 func enter(previous_state: String, state: State):
 	#_animation.play("PreSprint", -1, 1.0)
 	#_animation.queue("Sprint")
 	
-	_blend = _player.camera.get_arms_parameter("RunBlend/blend_amount")
+	_player.camera.set_arms_condition("run", true)
 
 
 func exit(next_state: String):
 	_animation.speed_scale = 1.0
+	_player.camera.set_arms_condition("run", false)
 
 
 func update(delta: float):
 	_player.update_gravity(delta)
 	_player.update_input(self.speed, acceleration, deceleration)
 	_player.update_velocity()
-	
-	if _blend < 1.0:
-		_blend += delta * 5
-		_player.camera.set_arms_parameter("RunBlend/blend_amount", min(_blend, 1.0))
 	
 	#_weapon.bob(delta, speed, 0.02)
 	#_weapon.mouse(delta)
