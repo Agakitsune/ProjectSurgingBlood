@@ -10,6 +10,8 @@ var weapon: WeaponController
 @onready var hook_cast = $FirstPersonCamera/Camera3D/HookCast3D
 @onready var bonker = $FirstPersonCamera/HeadBonker
 
+@onready var rope = $FirstPersonCamera/Camera3D/Rope
+
 var hooking = false
 var hookpoint = Vector3()
 var hookpoint_get = false
@@ -22,12 +24,11 @@ func hook():
 		if hook_cast.is_colliding():
 			print("Hook Collide")
 			if not hooking:
-				print("Hook NOT Collide")
 				hooking = true
 	if hooking:
 		velocity.y = 0
 		if not hookpoint_get:
-			hookpoint = hook_cast.get_collision_point() + Vector3(0, 2.25, 0)
+			hookpoint = hook_cast.get_collision_point() + Vector3(0, 1.25, 0)
 			hookpoint_get = true
 		if hookpoint.distance_to(transform.origin) > 1:
 			if hookpoint_get:
@@ -40,6 +41,16 @@ func hook():
 		hookpoint = null
 		hookpoint_get = false
 		global_translate(Vector3(0, -3, 0))
+
+func update_rope():
+	if not hooking:
+		rope.visible = false
+	else:
+		rope.visible = true
+		var dist = hookpoint.distance_to(transform.origin)
+		look_at(global_transform.origin + hookpoint, Vector3.UP)
+		rope.scale = Vector3(1, 1, dist)
+		print(rope.scale.z)
 
 func _ready() -> void:
 	shapecast.add_exception(self)
@@ -54,6 +65,7 @@ func _ready() -> void:
 
 func _process(delta: float):
 	hook()
+	update_rope()
 
 func update_gravity(delta: float) -> void:
 	velocity += get_gravity() * delta

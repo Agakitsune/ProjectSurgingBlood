@@ -401,7 +401,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_u4x1j")
 shape = SubResource("BoxShape3D_1ll0q")
 
 [node name="MeshInstance3D13" type="MeshInstance3D" parent="Obstacles"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 3, 4)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.6838, 15.7229, 10.9456)
 mesh = SubResource("BoxMesh_jh26w")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_u4x1j")
@@ -409,6 +409,50 @@ surface_material_override/0 = SubResource("StandardMaterial3D_u4x1j")
 [node name="StaticBody3D" type="StaticBody3D" parent="Obstacles/MeshInstance3D13"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Obstacles/MeshInstance3D13/StaticBody3D"]
+shape = SubResource("BoxShape3D_1ll0q")
+
+[node name="MeshInstance3D15" type="MeshInstance3D" parent="Obstacles"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.4126, 30.8231, -3.6872)
+mesh = SubResource("BoxMesh_jh26w")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_u4x1j")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Obstacles/MeshInstance3D15"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Obstacles/MeshInstance3D15/StaticBody3D"]
+shape = SubResource("BoxShape3D_1ll0q")
+
+[node name="MeshInstance3D16" type="MeshInstance3D" parent="Obstacles"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -33.9131, 23.4005, 3.78693)
+mesh = SubResource("BoxMesh_jh26w")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_u4x1j")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Obstacles/MeshInstance3D16"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Obstacles/MeshInstance3D16/StaticBody3D"]
+shape = SubResource("BoxShape3D_1ll0q")
+
+[node name="MeshInstance3D17" type="MeshInstance3D" parent="Obstacles"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -33.9131, 37.3454, 3.78693)
+mesh = SubResource("BoxMesh_jh26w")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_u4x1j")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Obstacles/MeshInstance3D17"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Obstacles/MeshInstance3D17/StaticBody3D"]
+shape = SubResource("BoxShape3D_1ll0q")
+
+[node name="MeshInstance3D14" type="MeshInstance3D" parent="Obstacles"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 3, 4)
+mesh = SubResource("BoxMesh_jh26w")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_u4x1j")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Obstacles/MeshInstance3D14"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Obstacles/MeshInstance3D14/StaticBody3D"]
 shape = SubResource("BoxShape3D_1ll0q")
 
 [node name="Options" type="Node" parent="."]
