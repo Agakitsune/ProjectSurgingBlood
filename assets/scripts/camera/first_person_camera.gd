@@ -75,9 +75,9 @@ func get_arms_condition(condition: String) -> bool:
 
 
 func _update_rotation(delta: float) -> void:
-	_mouse_rotation.x += _tilt_input * delta
+	_mouse_rotation.x += _tilt_input * 0.01
 	_mouse_rotation.x = clamp(_mouse_rotation.x, pitch_lower_limit, pitch_upper_limit)
-	_mouse_rotation.y += _rotation_input * delta
+	_mouse_rotation.y += _rotation_input * 0.01
 
 
 func _update_camera_with_parent(delta: float) -> void:
