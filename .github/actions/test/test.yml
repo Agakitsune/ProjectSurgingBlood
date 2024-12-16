@@ -1,0 +1,5 @@
+name: Test
+
+runs:
+  using: 'composite'
+  steps:

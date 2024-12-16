@@ -14,10 +14,18 @@ func visit(machine: StateMachine):
 		var jump := state as JumpState
 		_saves[jump.get_instance_id()] = jump.jumps
 		jump.jumps = self.jumps
+		
+	states = machine.find_children("*", "FallState")
+	
+	for state in states:
+		var jump := state as FallState
+		_saves[jump.get_instance_id()] = jump.jumps
+		jump.jumps = self.jumps
 
 
 func reset(_machine: StateMachine):
 	for id in _saves.keys():
+		var state = instance_from_id(id)
 		var jump := instance_from_id(id) as JumpState
-		if jump:
-			jump.jumps = _saves[id]
+		if (state is JumpState) or (state is FallState):
+			state.jumps = _saves[id]

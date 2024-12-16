@@ -1,0 +1,16 @@
+name: Build
+
+runs:
+  using: 'composite'
+  steps:
+    runs-on: ubuntu-latest
+    - name: Checkout
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+    - name: Set up godot 4.3-stable
+      uses: lihop/godot-setup@v2.1.3
+      with:
+        version: 4.3-stable
+    - name: Export project
+      run: godot --no-window --export "Windows Desktop" "build/windows/SurgingBlood.x86_64"

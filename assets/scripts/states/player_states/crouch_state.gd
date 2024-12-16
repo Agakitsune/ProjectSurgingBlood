@@ -18,11 +18,11 @@ func enter(previous_state: String, state: State):
 				if not Input.is_action_pressed("crouch"):
 					uncrouch(false)
 	else:
-		(_weapon.load_pose(_weapon.crouch_pose)
-				.duration(0.5)
-				.easing(Blunt.BluntEasing.BACK)
-				.easing_type(Blunt.BluntEasingType.OUT)
-		)
+		#(_weapon.load_pose(_weapon.crouch_pose)
+				#.duration(0.5)
+				#.easing(Blunt.BluntEasing.BACK)
+				#.easing_type(Blunt.BluntEasingType.OUT)
+		#)
 
 		_animation.play("Crouch", -1.0, crouch_speed)
 
@@ -37,8 +37,8 @@ func update(delta: float):
 	_player.update_velocity()
 	
 	#if _player.velocity.length_squared() == 0.0:
-	_weapon.idle(delta)
-	_weapon.update(delta)
+	#_weapon.idle(delta)
+	#_weapon.update(delta)
 	
 	match Globals.option.crouch:
 		Options.KeyMode.TOGGLE:
@@ -48,8 +48,8 @@ func update(delta: float):
 			if Input.is_action_just_released("crouch"):
 				uncrouch(false)
 
-	if Input.is_action_just_pressed("main_attack"):
-		_weapon.attack()
+	#if Input.is_action_just_pressed("main_attack"):
+		#_weapon.attack()
 
 
 func physics_update(delta: float):
@@ -72,5 +72,5 @@ func uncrouch(toggle: bool):
 			uncrouch(toggle)
 
 
-func on_attack_finished() -> void:
-	_weapon.load_pose(_weapon.crouch_pose).duration(0.5)
+#func on_attack_finished() -> void:
+	#_weapon.load_pose(_weapon.crouch_pose).duration(0.5)
