@@ -1,9 +1,9 @@
 [gd_scene load_steps=6 format=3 uid="uid://lcxhbo00ftsy"]
 
-[ext_resource type="Script" path="res://assets/scripts/ennemy.gd" id="1_doyi6"]
+[ext_resource type="Script" path="res://assets/scripts/enemy.gd" id="1_doyi6"]
 [ext_resource type="SpriteFrames" uid="uid://ka6svqqkeqhe" path="res://assets/sprite_frames/ennemies/werebear.tres" id="2_1yt1o"]
 [ext_resource type="Script" path="res://assets/scripts/enemy_state_machine.gd" id="3_bq0tw"]
-[ext_resource type="Texture2D" uid="uid://dqxt8g8qbulu2" path="res://assets/textures/spotted.png" id="4_ai5ct"]
+[ext_resource type="Texture2D" uid="uid://bjgympnc26k1" path="res://assets/textures/spotted.png" id="4_ai5ct"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_066et"]
 size = Vector3(2, 2.9, 2)
