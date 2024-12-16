@@ -2,13 +2,15 @@ extends GutTest
 
 var _enemy: Enemy
 
-func before_each():
-	_enemy = Enemy.new()
-	
+# Warn which test is running
 func before_all():
 	gut.p("== Testing enemy ==", 1)
 	
-# Testing if the enemy is properly loaded
+# Make sure to create one new clean enemy for each run
+func before_each():
+	_enemy = Enemy.new()
+	
+# Testing if the enemy is properly loaded from a dataset
 func test_assert_enemy_loaded():
 	# Loading sample data
 	var data = load("res://assets/scripts/resources/enemies/werebear.tres")
@@ -35,8 +37,7 @@ func test_assert_enemy_loaded():
 	assert_eq(_enemy.collider.shape.size, data.dimension, "Dimension is invalid")
 	assert_eq(_enemy.collider.position.y, data.dimension.y / 2.0, "Enemy position y invalid")
 
-# We check if whatever damage we deal,
-# the player's health stay above 0
+# We check if whatever damage we deal, the player's health stays above 0
 func test_assert_hp_superior_to_zero():
 	_enemy.damage(9999999)
 	assert_eq(int(_enemy._life), 0, "Enemy life is not equal to 0")
