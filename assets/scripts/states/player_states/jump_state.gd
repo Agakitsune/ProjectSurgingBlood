@@ -11,6 +11,7 @@ extends PlayerState
 var _limit: float
 var _jump_count: int = 0
 var _fall_distance: float
+var _initial_input: Vector3
 
 func enter(previous_state: String, state: State):
 	#if previous_state == "FallState":
@@ -25,7 +26,10 @@ func enter(previous_state: String, state: State):
 	_player.camera.set_arms_condition("high_fall", false)
 	_player.floor = Basis()
 	
-	_fall_distance = _player.global_position.y
+	_player.update_input()
+	_initial_input = _player.input
+	
+	_fall_distance = _player.position.y
 	
 	if _player.hspeed > 4.0:
 		_limit = _player.hspeed
@@ -49,9 +53,11 @@ func update(delta: float):
 	_player.update_input()
 	_player.accelerate(speed)
 	_player.limit(_limit)
+	
 	_player.velocity.y += _player.gravity_pull
 	_player.gravity_pull = 0
 	_player.vspeed = _player.velocity.y
+	
 	_player.move_and_slide()
 	
 	#_weapon.mouse(delta)
@@ -60,6 +66,10 @@ func update(delta: float):
 	if Input.is_action_just_pressed("jump") and (_jump_count < jumps):
 		_jump_count += 1
 		_player.velocity.y = jump_velocity
+		_player.velocity.x = _player.input.x * _limit
+		_player.velocity.z = _player.input.z * _limit
+		_player.limit(_limit)
+
 	#
 	#if Input.is_action_just_released("jump"):
 		#if _player.velocity.y > 0.0:
