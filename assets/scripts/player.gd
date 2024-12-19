@@ -48,14 +48,15 @@ func update_velocity(speed: float, decay: float, delta: float) -> void:
 func accelerate(speed: float) -> void:
 	velocity.x += input.x * speed
 	velocity.z += input.z * speed
-	hspeed = velocity.length()
+	var limited = Vector3(velocity.x, 0.0, velocity.z)
+	hspeed = limited.length()
 #
 #
 func limit(speed: float) -> void:
 	var limited = Vector3(velocity.x, 0.0, velocity.z).limit_length(speed)
 	velocity.x = limited.x
 	velocity.z = limited.z
-	hspeed = velocity.length()
+	hspeed = limited.length()
 #
 #
 #func boost(value: float) -> void:

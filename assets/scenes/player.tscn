@@ -178,6 +178,7 @@ deceleration = 1.0
 
 [node name="JumpState" type="Node" parent="PlayerStateMachine"]
 script = ExtResource("9_vttwr")
+jumps = 2
 
 [node name="FallState" type="Node" parent="PlayerStateMachine"]
 script = ExtResource("10_a70q0")

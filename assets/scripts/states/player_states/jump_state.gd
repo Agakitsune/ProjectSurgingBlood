@@ -51,6 +51,7 @@ func update(delta: float):
 	_player.limit(_limit)
 	_player.velocity.y += _player.gravity_pull
 	_player.gravity_pull = 0
+	_player.vspeed = _player.velocity.y
 	_player.move_and_slide()
 	
 	#_weapon.mouse(delta)
@@ -59,7 +60,6 @@ func update(delta: float):
 	if Input.is_action_just_pressed("jump") and (_jump_count < jumps):
 		_jump_count += 1
 		_player.velocity.y = jump_velocity
-		# FIX THIS
 	#
 	#if Input.is_action_just_released("jump"):
 		#if _player.velocity.y > 0.0:

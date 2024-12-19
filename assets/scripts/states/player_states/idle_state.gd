@@ -25,13 +25,13 @@ func exit(next_state: String):
 func update(delta: float):
 	var on_floor = _player.is_on_floor()
 	
-	#for data in _data:
-		#DebugDraw3D.draw_arrow(data["pos"], data["pos"] + data["normal"] * 2, Color.ORANGE, 0.1)
-		#DebugDraw3D.draw_arrow(data["pos"], data["pos"] + data["axis"] * 2, Color.CYAN, 0.1)
-		#
-		#DebugDraw3D.draw_arrow(data["pos"], data["pos"] + data["basis"].x * 3, Color.RED, 0.1)
-		#DebugDraw3D.draw_arrow(data["pos"], data["pos"] + data["basis"].y * 3, Color.GREEN, 0.1)
-		#DebugDraw3D.draw_arrow(data["pos"], data["pos"] + data["basis"].z * 3, Color.BLUE, 0.1)
+	for data in _data:
+		DebugDraw3D.draw_arrow(data["pos"], data["pos"] + data["normal"] * 2, Color.ORANGE, 0.1)
+		DebugDraw3D.draw_arrow(data["pos"], data["pos"] + data["axis"] * 2, Color.CYAN, 0.1)
+		
+		DebugDraw3D.draw_arrow(data["pos"], data["pos"] + data["basis"].x * 3, Color.RED, 0.1)
+		DebugDraw3D.draw_arrow(data["pos"], data["pos"] + data["basis"].y * 3, Color.GREEN, 0.1)
+		DebugDraw3D.draw_arrow(data["pos"], data["pos"] + data["basis"].z * 3, Color.BLUE, 0.1)
 
 	_player.update_gravity(delta)
 	if on_floor:
