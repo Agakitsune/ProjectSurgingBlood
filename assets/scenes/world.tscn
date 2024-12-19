@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=3 uid="uid://5no5cidqgq7f"]
+[gd_scene load_steps=52 format=3 uid="uid://5no5cidqgq7f"]
 
 [ext_resource type="PackedScene" uid="uid://ch55pau8gkcoc" path="res://assets/scenes/player.tscn" id="1_l5bwy"]
 [ext_resource type="Script" path="res://assets/scripts/world.gd" id="1_uu2gk"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://assets/scripts/options.gd" id="5_nm05o"]
 [ext_resource type="Script" path="res://assets/scripts/modifiers/player_modifier.gd" id="6_xdyos"]
 [ext_resource type="Script" path="res://assets/scripts/modifiers/double_jump_modifier.gd" id="7_kloyf"]
+[ext_resource type="PackedScene" uid="uid://dqi065y1gd1w1" path="res://assets/scenes/slopes.tscn" id="8_nbqda"]
 [ext_resource type="PackedScene" uid="uid://lcxhbo00ftsy" path="res://assets/scenes/ennemy.tscn" id="9_n6o8v"]
 [ext_resource type="Resource" uid="uid://bu1b6yk5kvet2" path="res://assets/scripts/resources/enemies/werebear.tres" id="10_n80xi"]
 
@@ -410,6 +411,9 @@ surface_material_override/0 = SubResource("StandardMaterial3D_u4x1j")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Obstacles/MeshInstance3D13/StaticBody3D"]
 shape = SubResource("BoxShape3D_1ll0q")
+
+[node name="slopes" parent="Obstacles" instance=ExtResource("8_nbqda")]
+transform = Transform3D(-50, 0, -7.54979e-06, 0, 50, 0, 7.54979e-06, 0, -50, 0, 0, 0)
 
 [node name="Options" type="Node" parent="."]
 script = ExtResource("5_nm05o")

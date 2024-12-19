@@ -22,6 +22,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 Globals="*res://assets/scripts/autoloads/globals.gd"
+Math="*res://assets/scripts/autoloads/math.gd"
 
 [global_group]
 

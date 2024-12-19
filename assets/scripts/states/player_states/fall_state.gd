@@ -1,7 +1,7 @@
 class_name FallState
 extends PlayerState
 
-@export var speed: float = 4.0
+@export var speed: float = 0.1
 @export var acceleration: float = 0.1
 @export var deceleration: float = 0.25
 @export var jump_velocity: float = 5.0
@@ -47,11 +47,11 @@ func exit(next_state: String):
 
 
 func update(delta: float):
-	_player.update_gravity(delta)
-	if _control:
-		_moving = _player.update_input(_actual_speed * air_multiplier, acceleration, deceleration)
-	_player.update_velocity()
-	_actual_speed = lerp(_actual_speed, speed, delta)
+	#_player.update_gravity(delta)
+	#var _input = _player.update_input()
+	#_player.accelerate(speed)
+	#_player.move_and_slide()
+	#_actual_speed = lerp(_actual_speed, speed, delta)
 	
 	#_weapon.mouse(delta)
 	#_weapon.update(delta)

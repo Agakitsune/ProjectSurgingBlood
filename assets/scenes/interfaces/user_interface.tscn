@@ -1,5 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://iw1gf6ag02f"]
+[gd_scene load_steps=3 format=3 uid="uid://iw1gf6ag02f"]
 
+[ext_resource type="Script" path="res://assets/scripts/interfaces/user_interface.gd" id="1_0juyj"]
 [ext_resource type="Texture2D" uid="uid://cp8cixadxpxjh" path="res://assets/textures/interface/cursor.png" id="1_4upe3"]
 
 [node name="UserInterface" type="Control"]
@@ -10,6 +11,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
+script = ExtResource("1_0juyj")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 modulate = Color(1, 1, 1, 0.74902)
@@ -27,3 +29,44 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("1_4upe3")
 expand_mode = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_top = 500
+
+[node name="CenterContainer" type="CenterContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/CenterContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/CenterContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/CenterContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Horizontal Speed: "
+
+[node name="HSpeed" type="Label" parent="MarginContainer/CenterContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+text = "10"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/CenterContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/CenterContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "Vertical Speed: "
+
+[node name="VSpeed" type="Label" parent="MarginContainer/CenterContainer/VBoxContainer/HBoxContainer2"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+text = "10"

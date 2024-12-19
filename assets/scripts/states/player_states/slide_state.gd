@@ -1,77 +1,61 @@
 class_name SlideState
 extends PlayerState
 
-@export var speed: float = 8.0
-@export var acceleration: float = 0.1
-@export var deceleration: float = 0.25
-@export var tilt: float = 1.0
+@export var speed: float = 14.0
+@export var boost: float = 5.0
 
 func enter(previous_state: String, state: State):
-	set_tilt(_player.camera.last_rotation)
-	_animation.get_animation("Slide").track_set_key_value(3, 0, _player.velocity.length())
-	_animation.get_animation("Slide").track_set_key_value(3, 1, _player.velocity.length())
-	_animation.speed_scale = 1.0
-	_animation.play("Slide", -1.0, 4.0)
+	#_player.camera.set_arms_condition("idle", true)
+	_player.animation_tree.set("parameters/conditions/idle", false)
+	_player.animation_tree.set("parameters/conditions/slide", true)
 	
-	#(_weapon.load_pose(_weapon.crouch_pose)
-			#.duration(0.25)
-			#.easing(Blunt.BluntEasing.BACK)
-			#.easing_type(Blunt.BluntEasingType.OUT)
-	#)
-
+	_player.boost(boost)
 
 
 func exit(next_state: String):
-	pass
+	_player.camera.set_arms_condition("idle", false)
+	_player.steering = Vector3.ZERO
 
 
 func update(delta: float):
-	_player.update_gravity(delta)
-	_player.update_speed(speed, acceleration, deceleration)
-	_player.update_velocity()
+	#_player.update_gravity(delta)
+	##_player.update_input()
+	#_player.steer(15, 4, delta)
+	#_player.update_velocity(speed, 1, delta)
+	#_player.move_and_slide()
 	
+	#_weapon.idle(delta)
 	#_weapon.mouse(delta)
 	#_weapon.update(delta)
 	
-	if _player.is_on_wall():
-		finish()
-
-	if _player.velocity.y < 0.0 and not _player.is_on_floor():
-		_animation.play("SlideToIdle", -1.0, 4.0)
-		
-		(_animation.get_animation("SlideToIdle")
-				.track_set_key_value(4, 0, _player.camera.rotation)
-		)
-		
-		delegated.emit("FallState")
+	#_weapon.sway_idle(delta)
+	#_weapon.sway_weapon(delta)
 	
-	match Globals.option.crouch:
-		Options.KeyMode.HOLD:
-			if Input.is_action_just_released("crouch"):
-				finish()
+	var on_floor = _player.is_on_floor()
+	
+	if Input.is_action_just_released("crouch"):
+		delegated.emit("RunState")
+	
+	#match Globals.option.crouch:
+		#Options.KeyMode.TOGGLE:
+			#if Input.is_action_just_pressed("crouch") and on_floor:
+				#delegated.emit("CrouchState")
+		#Options.KeyMode.HOLD:
+			#if Input.is_action_pressed("crouch") and on_floor:
+				#delegated.emit("CrouchState")
+	
+	#if _player.direction and on_floor:
+		#delegated.emit("RunState")
+		
+	#if Input.is_action_just_pressed("jump") and on_floor:
+		#delegated.emit("JumpState")
+
+	#if Input.is_action_just_pressed("main_attack"):
+		#_weapon.attack()
+
+	#if _player.velocity.y < 0.0 and not on_floor:
+		#delegated.emit("FallState")
 
 
 func physics_update(delta: float):
 	pass
-
-
-func set_tilt(rotation: float) -> void:
-	var tilt := Vector3.ZERO
-	tilt.z = clamp(tilt.z * rotation, -0.1, 0.1)
-	if tilt.z == 0.0:
-		tilt.z = 0.05
-	_animation.get_animation("Slide").track_set_key_value(6, 1, tilt)
-	_animation.get_animation("Slide").track_set_key_value(6, 2, tilt)
-
-
-func finish():
-	if _animation.is_playing():
-		_animation.seek(5.0, true)
-	
-	if not _player.shapecast.is_colliding():
-		_animation.play("SlideToCrouch", -1.0, 4.0)
-
-		delegated.emit("CrouchState")
-	else:
-		await get_tree().create_timer(0.1).timeout
-		finish()

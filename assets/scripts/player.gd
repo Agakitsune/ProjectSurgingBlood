@@ -6,16 +6,21 @@ extends CharacterBody3D
 @export var shapecast: ShapeCast3D
 @export var state_machine: StateMachine
 
-var weapon: WeaponController
+var hspeed: float
+var vspeed: float
+var input: Vector3
+var steering: Vector3
+var floor: Basis
+var gravity_pull: float
 
-var _direction: Vector3
+@onready var animation_tree: AnimationTree = $AnimationTree
 
 func _ready() -> void:
 	shapecast.add_exception(self)
 
-	var _scene = preload("res://assets/scenes/weapon.tscn")
-	weapon = _scene.instantiate()
-	weapon.data = preload("res://assets/scripts/resources/weapon_datas/blade.tres")
+	#var _scene = preload("res://assets/scenes/weapon.tscn")
+	#weapon = _scene.instantiate()
+	#weapon.data = preload("res://assets/scripts/resources/weapon_datas/blade.tres")
 
 	#camera.camera.add_child(weapon)
 
@@ -23,29 +28,47 @@ func _ready() -> void:
 
 
 func update_gravity(delta: float) -> void:
-	velocity += get_gravity() * delta
+	gravity_pull += -12 * delta
+	#velocity += get_gravity() * delta
 
 
-func update_input(speed: float, acceleration: float, deceleration: float) -> bool:
+func update_input() -> bool:
 	var input_dir := Input.get_vector("left", "right", "forward", "backward")
-	_direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
-	if _direction:
-		velocity.x = lerp(velocity.x, _direction.x * speed, acceleration)
-		velocity.z = lerp(velocity.z, _direction.z * speed, acceleration)
-		return true
-	velocity.x = move_toward(velocity.x, 0, deceleration)
-	velocity.z = move_toward(velocity.z, 0, deceleration)
-	return false
+	input = (floor * Vector3(input_dir.x, 0, input_dir.y)).rotated(floor.y, rotation.y).normalized()
+	return !!input
 
 
-func update_speed(speed: float, acceleration: float, deceleration: float) -> void:
-	if _direction:
-		velocity.x = lerp(velocity.x, _direction.x * speed, acceleration)
-		velocity.z = lerp(velocity.z, _direction.z * speed, acceleration)
-	else:
-		velocity.x = move_toward(velocity.x, 0, deceleration)
-		velocity.z = move_toward(velocity.z, 0, deceleration)
+func update_velocity(speed: float, decay: float, delta: float) -> void:
+	velocity = Math.decay(velocity, input * speed, decay, delta)
+	hspeed = velocity.length()
+	velocity.y += gravity_pull
+	vspeed = gravity_pull
 
 
-func update_velocity() -> void:
-	move_and_slide()
+func accelerate(speed: float) -> void:
+	velocity.x += input.x * speed
+	velocity.z += input.z * speed
+	hspeed = velocity.length()
+#
+#
+func limit(speed: float) -> void:
+	var limited = Vector3(velocity.x, 0.0, velocity.z).limit_length(speed)
+	velocity.x = limited.x
+	velocity.z = limited.z
+	hspeed = velocity.length()
+#
+#
+#func boost(value: float) -> void:
+	#var boost = Vector3(velocity.x, 0.0, velocity.z)
+	#var planar_speed = boost.length()
+	#boost = boost.normalized() * (planar_speed + value)
+	#velocity.x = boost.x
+	#velocity.z = boost.z
+	#self.hspeed = velocity.length()
+#
+#
+#func steer(amount: float, decay: float, delta: float) -> void:
+	#var input_dir := Input.get_vector("left", "right", "forward", "backward")
+	#var dir = (basis * Vector3(input_dir.x, 0, 0)).normalized()
+	#steering.x = Math.decay(steering.x, dir.x * amount, decay, delta)
+	#steering.z = Math.decay(steering.z, dir.z * amount, decay, delta)

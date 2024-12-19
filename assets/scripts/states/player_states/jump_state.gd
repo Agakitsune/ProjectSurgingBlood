@@ -1,30 +1,36 @@
 class_name JumpState
 extends PlayerState
 
-@export var speed: float = 4.0
+@export var speed: float = 0.2
 @export var acceleration: float = 0.1
 @export var deceleration: float = 0.25
-@export var jump_velocity: float = 5.0
+@export var jump_velocity: float = 7.5
 @export var air_multiplier: float = 0.85
 @export var jumps: int = 1
 
-var _actual_speed: float
+var _limit: float
 var _jump_count: int = 0
+var _fall_distance: float
 
 func enter(previous_state: String, state: State):
-	_actual_speed = max(_player.velocity.length(), speed)
-	_animation.play("Jump")
-	
-	if previous_state == "FallState":
-		_jump_count = state._jump_count
-		_player.velocity.y = jump_velocity
-	else:
-		_jump_count = 1
-		_player.velocity.y += jump_velocity
+	#if previous_state == "FallState":
+		#_jump_count = state._jump_count
+		#_player.velocity.y = jump_velocity
+	#else:
+	_jump_count = 1
+	_player.velocity += _player.floor.y * jump_velocity
 	
 	_player.camera.set_arms_condition("jump", true)
 	_player.camera.set_arms_condition("fall", false)
 	_player.camera.set_arms_condition("high_fall", false)
+	_player.floor = Basis()
+	
+	_fall_distance = _player.global_position.y
+	
+	if _player.hspeed > 4.0:
+		_limit = _player.hspeed
+	else:
+		_limit = 4.0
 	
 	#if (
 			#(previous_state != "WalkState")
@@ -40,8 +46,12 @@ func exit(next_state: String):
 
 func update(delta: float):
 	_player.update_gravity(delta)
-	_player.update_input(_actual_speed * air_multiplier, acceleration, deceleration)
-	_player.update_velocity()
+	_player.update_input()
+	_player.accelerate(speed)
+	_player.limit(_limit)
+	_player.velocity.y += _player.gravity_pull
+	_player.gravity_pull = 0
+	_player.move_and_slide()
 	
 	#_weapon.mouse(delta)
 	#_weapon.update(delta)
@@ -49,20 +59,26 @@ func update(delta: float):
 	if Input.is_action_just_pressed("jump") and (_jump_count < jumps):
 		_jump_count += 1
 		_player.velocity.y = jump_velocity
-	
-	if Input.is_action_just_released("jump"):
-		if _player.velocity.y > 0.0:
-			_player.velocity.y /= 1.5
-	
-	if _player.velocity.y < 0.0:
-		delegated.emit("FallState")
-	
+		# FIX THIS
+	#
+	#if Input.is_action_just_released("jump"):
+		#if _player.velocity.y > 0.0:
+			#_player.velocity.y /= 1.5
+	#
+	##if _player.velocity.y < 0.0:
+		##delegated.emit("FallState")
+	#
 	if _player.is_on_floor():
 		_jump_count = 0
-		if _player.velocity.length_squared() == 0.0:
+		var distance = _fall_distance - _player.global_position.y
+		if distance >= 1.0:
+			_player.camera.set_arms_condition("high_fall", true)
+		else:
+			_player.camera.set_arms_condition("fall", true)
+		if _player.hspeed == 0.0:
 			delegated.emit("IdleState")
 		else:
-			delegated.emit("WalkState")
+			delegated.emit("RunState")
 
 
 func physics_update(delta: float):
