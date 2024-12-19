@@ -69,6 +69,9 @@ func update(delta: float):
 		_player.velocity.x = _player.input.x * _limit
 		_player.velocity.z = _player.input.z * _limit
 		_player.limit(_limit)
+		
+		if _initial_input.angle_to(_player.input) > (95 * PI / 180):
+			_limit /= 2 # Punish the player for going to sharp on their jump
 
 	#
 	#if Input.is_action_just_released("jump"):
